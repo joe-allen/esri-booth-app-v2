@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "dev:tauri": "pnpm tauri dev",
-    "build:tauri": "pnpm tauri build",
+    "dev:tauri": "npm tauri dev",
+    "build:tauri": "npm tauri build",
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
