@@ -7,6 +7,7 @@
     "dev": "vite dev",
     "dev:tauri": "pnpm tauri dev",
     "build:tauri": "pnpm tauri build",
+    "tauri": "tauri",
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
