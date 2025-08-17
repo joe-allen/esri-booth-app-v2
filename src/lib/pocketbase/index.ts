@@ -1,5 +1,12 @@
+import { type TypedPocketBase } from "./pocketbase-types";
 import PocketBase from "pocketbase";
 
-const url = "http://127.0.0.1:8090/";
-
-export const pb = new PocketBase(url);
+export default function initPocketBase(url: string) {
+  try {
+    const pb = new PocketBase(url) as TypedPocketBase;
+    return pb;
+  } catch (error) {
+    console.log("Error initializing database: ", error);
+    return null;
+  }
+}

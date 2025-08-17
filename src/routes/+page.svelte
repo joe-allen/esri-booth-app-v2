@@ -1,16 +1,23 @@
 <script lang="ts">
-  import { pb } from "$lib/pocketbase";
+  import initPocketBase from "$lib/pocketbase";
   import { onMount } from "svelte";
 
   let records: object = $state({});
+  let pb: object | null = $state({});
 
   onMount(async () => {
+    if (navigator.onLine) {
+      pb = initPocketBase("https://aecdemo.pockethost.io/");
+    } else {
+      pb = initPocketBase("http://127.0.0.1:8090/");
+    }
+    console.log("pb", pb);
     records = await pb.collection("conferences").getList(1, 20, {});
     console.log("records", records);
   });
 </script>
 
-<h1>Conferences</h1>
+<h1>Conferences:</h1>
 {#if records}
   {#each records.items as record}
     <div>
@@ -19,6 +26,7 @@
   {/each}
 {/if}
 <p>
-  Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
-  documentation
+  Visit the <a target="_blank" href="http://127.0.0.1:8090/_/#/login"
+    >Admin area</a
+  >.
 </p>
