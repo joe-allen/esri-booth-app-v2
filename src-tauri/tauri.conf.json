@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "aec_demo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "identifier": "com.esri.aec-demo",
   "build": {
     "beforeDevCommand": "pnpm dev",

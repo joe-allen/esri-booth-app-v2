@@ -12,6 +12,8 @@ export enum Collections {
 	Otps = "_otps",
 	Superusers = "_superusers",
 	Conferences = "conferences",
+	Content = "content",
+	Industries = "industries",
 	Users = "users",
 }
 
@@ -19,6 +21,11 @@ export enum Collections {
 export type IsoDateString = string
 export type RecordIdString = string
 export type HTMLString = string
+
+export type GeoPoint = {
+	lon: number
+	lat: number
+}
 
 type ExpandType<T> = unknown extends T
 	? T extends unknown
@@ -92,6 +99,28 @@ export type SuperusersRecord = {
 }
 
 export type ConferencesRecord = {
+	background_image?: string
+	created?: IsoDateString
+	id: string
+	title?: string
+	updated?: IsoDateString
+}
+
+export type ContentRecord = {
+	archive?: boolean
+	conference?: RecordIdString[]
+	created?: IsoDateString
+	embedded?: boolean
+	file?: string
+	geopoint?: GeoPoint
+	id: string
+	intro?: HTMLString
+	title?: string
+	updated?: IsoDateString
+	url?: string
+}
+
+export type IndustriesRecord = {
 	created?: IsoDateString
 	id: string
 	title?: string
@@ -118,6 +147,8 @@ export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemF
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
 export type ConferencesResponse<Texpand = unknown> = Required<ConferencesRecord> & BaseSystemFields<Texpand>
+export type ContentResponse<Texpand = unknown> = Required<ContentRecord> & BaseSystemFields<Texpand>
+export type IndustriesResponse<Texpand = unknown> = Required<IndustriesRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -129,6 +160,8 @@ export type CollectionRecords = {
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
 	conferences: ConferencesRecord
+	content: ContentRecord
+	industries: IndustriesRecord
 	users: UsersRecord
 }
 
@@ -139,6 +172,8 @@ export type CollectionResponses = {
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
 	conferences: ConferencesResponse
+	content: ContentResponse
+	industries: IndustriesResponse
 	users: UsersResponse
 }
 
@@ -152,5 +187,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: '_otps'): RecordService<OtpsResponse>
 	collection(idOrName: '_superusers'): RecordService<SuperusersResponse>
 	collection(idOrName: 'conferences'): RecordService<ConferencesResponse>
+	collection(idOrName: 'content'): RecordService<ContentResponse>
+	collection(idOrName: 'industries'): RecordService<IndustriesResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
