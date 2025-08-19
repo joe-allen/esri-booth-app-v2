@@ -11,7 +11,11 @@ const config = {
     adapter: adapter({
       fallback: 'index.html'
     })
-  }
+  },
+  prerender: {
+    handleHttpError: 'warn',
+    handleMissingId: 'warn'
+  },
 };
 
 export default config;
