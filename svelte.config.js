@@ -10,12 +10,13 @@ const config = {
   kit: {
     adapter: adapter({
       fallback: 'index.html'
-    })
-  },
-  prerender: {
-    handleHttpError: 'warn',
-    handleMissingId: 'warn'
-  },
+    }),
+    prerender: {
+      handleHttpError: 'warn',
+      handleMissingId: 'warn',
+      entries: ['*'] // This ensures all static routes are prerendered
+    }
+  }
 };
 
 export default config;
