@@ -33,16 +33,16 @@ jobs:
           BUILD_TARGET: static
           PUBLIC_BUILD_TARGET: static
           PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
-      - name: create static build archive
-        run: zip -r static-build.zip build-static
       - name: get package version
         id: package-version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+      - name: create static build archive
+        run: zip -r aec_demo_${{ steps.package-version.outputs.version }}_static_build.zip build-static
       - name: upload to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: app-v${{ steps.package-version.outputs.version }}
-          files: static-build.zip
+          files: aec_demo_${{ steps.package-version.outputs.version }}_static_build.zip
           draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
