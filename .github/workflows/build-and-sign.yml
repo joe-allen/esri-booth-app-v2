@@ -35,11 +35,14 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install
       - name: set build target
-        run: echo "PUBLIC_BUILD_TARGET=tauri" >> $GITHUB_ENV
+        run: |
+          echo "PUBLIC_BUILD_TARGET=tauri" >> $GITHUB_ENV
+          echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLIC_BUILD_TARGET: tauri
+          PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
         with:
           tagName: app-v__VERSION__
           releaseName: "App v__VERSION__"
