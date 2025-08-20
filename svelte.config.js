@@ -9,8 +9,8 @@ const config = {
 
   kit: {
     adapter: adapter({
-      pages: 'build',
-      assets: 'build',
+      pages: process.env.BUILD_TARGET === "static" ? 'build-static' : 'build',
+      assets: process.env.BUILD_TARGET === "static" ? 'build-static' : 'build',
       fallback: process.env.BUILD_TARGET === "tauri" || process.env.BUILD_TARGET === "static" ? undefined : 'index.html',
       precompress: false
     }),
