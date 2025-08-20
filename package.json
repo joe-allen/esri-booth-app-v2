@@ -8,6 +8,7 @@
     "build": "vite build",
     "dev:static": "cp .env.static .env && BUILD_TARGET=static vite dev",
     "build:static": "cp .env.static .env && BUILD_TARGET=static vite build",
+    "build:file": "cp .env.file .env && BUILD_TARGET=file vite build",
     "dev:tauri": "pnpm tauri dev",
     "build:tauri": "cp .env.static .env && pnpm tauri build",
     "tauri": "tauri",

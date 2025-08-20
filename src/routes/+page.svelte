@@ -6,7 +6,7 @@
 
 Welcome, select an
 <!-- THIS WONT WORK ON TAURI DEV: -->
-{#if PUBLIC_BUILD_TARGET === "static"}
+{#if PUBLIC_BUILD_TARGET === "static" || PUBLIC_BUILD_TARGET === "file"}
   <a href="industries.html">industry.html</a>.
 {:else}
   <a href="industries">industry</a>.

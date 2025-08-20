@@ -5,7 +5,9 @@
   let { data } = $props();
 
   function navigateToIndustry(id: string) {
+    console.log("outside");
     if (PUBLIC_BUILD_TARGET === "static") {
+      console.log("inside");
       window.location.href = `industries/${id}.html`;
     } else {
       goto(`industries/${id}`);
@@ -22,11 +24,20 @@
       {#if PUBLIC_BUILD_TARGET === "static"}
         <p>
           <button
-            style="color: teal; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
+            style="color: green; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
             onclick={() => navigateToIndustry(record.id)}
           >
-            {record.title} - {record.id}
+            {record.title}
           </button>
+        </p>
+      {:else if PUBLIC_BUILD_TARGET === "file"}
+        <p>
+          <a
+            style="color: green; text-decoration: underline; cursor: pointer;"
+            href="industries/{record.id}.html"
+          >
+            {record.title}
+          </a>
         </p>
       {:else}
         <p>

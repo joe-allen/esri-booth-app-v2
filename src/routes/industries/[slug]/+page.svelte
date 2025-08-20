@@ -25,6 +25,8 @@
         >
           {item.title}
         </button>
+      {:else if PUBLIC_BUILD_TARGET === "file"}
+        <p>Nice</p>
       {:else}
         <a style="color: #c00;" href={`../conferences/${item.id}`}
           >{item.title} - ${item.id}</a
