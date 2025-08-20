@@ -11,11 +11,11 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: process.env.BUILD_TARGET === "static" || process.env.BUILD_TARGET === "file" ? undefined : 'index.html',
+      fallback: process.env.BUILD_TARGET === "tauri" || process.env.BUILD_TARGET === "static" ? undefined : 'index.html',
       precompress: false
     }),
     paths: {
-      base: process.env.BUILD_TARGET === "static" ? '' : ''
+      base: process.env.BUILD_TARGET === "tauri" ? '' : ''
     },
     prerender: {
       handleHttpError: 'warn',

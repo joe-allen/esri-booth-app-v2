@@ -5,7 +5,7 @@
   let { data } = $props();
 
   function navigateToConference(id: string) {
-    if (PUBLIC_BUILD_TARGET === "static") {
+    if (PUBLIC_BUILD_TARGET === "tauri") {
       window.location.href = `../conferences/${id}.html`;
     } else {
       goto(`../conferences/${id}`);
@@ -18,15 +18,22 @@
   <h2>Conferences</h2>
   {#each data.conferencesByIndustry as item}
     <div>
-      {#if PUBLIC_BUILD_TARGET === "static"}
+      {#if PUBLIC_BUILD_TARGET === "tauri"}
         <button
           style="color: orange; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
           onclick={() => navigateToConference(item.id)}
         >
           {item.title}
         </button>
-      {:else if PUBLIC_BUILD_TARGET === "file"}
-        <p>Nice</p>
+      {:else if PUBLIC_BUILD_TARGET === "static"}
+        <p>
+          <a
+            style="color: green; text-decoration: underline; cursor: pointer;"
+            href="../conferences/{item.id}.html"
+          >
+            {item.title}
+          </a>
+        </p>
       {:else}
         <a style="color: #c00;" href={`../conferences/${item.id}`}
           >{item.title} - ${item.id}</a

@@ -6,7 +6,7 @@
 
   function navigateToIndustry(id: string) {
     console.log("outside");
-    if (PUBLIC_BUILD_TARGET === "static") {
+    if (PUBLIC_BUILD_TARGET === "tauri") {
       console.log("inside");
       window.location.href = `industries/${id}.html`;
     } else {
@@ -16,12 +16,11 @@
 </script>
 
 <h1>Industries</h1>
-<h3>Build Target: {PUBLIC_BUILD_TARGET}</h3>
 {#if data.industries}
   {#each data.industries.items as record}
     <div>
       <!-- demo only: probably dont want to show ID anywhere in app -->
-      {#if PUBLIC_BUILD_TARGET === "static"}
+      {#if PUBLIC_BUILD_TARGET === "tauri"}
         <p>
           <button
             style="color: green; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
@@ -30,7 +29,7 @@
             {record.title}
           </button>
         </p>
-      {:else if PUBLIC_BUILD_TARGET === "file"}
+      {:else if PUBLIC_BUILD_TARGET === "static"}
         <p>
           <a
             style="color: green; text-decoration: underline; cursor: pointer;"

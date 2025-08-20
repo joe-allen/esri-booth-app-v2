@@ -4,7 +4,7 @@ import { PUBLIC_BUILD_TARGET } from "$env/static/public";
 import initPocketBase from "$lib/pocketbase";
 
 export const prerender =
-  PUBLIC_BUILD_TARGET === "static" || PUBLIC_BUILD_TARGET === "file"
+  PUBLIC_BUILD_TARGET === "tauri" || PUBLIC_BUILD_TARGET === "static"
     ? true
     : false;
 
