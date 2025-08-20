@@ -26,15 +26,21 @@ jobs:
           echo "BUILD_TARGET=static" >> $GITHUB_ENV
           echo "PUBLIC_BUILD_TARGET=static" >> $GITHUB_ENV
           echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
-          pnpm run build:static
+          pnpm build
         env:
           BUILD_TARGET: static
           PUBLIC_BUILD_TARGET: static
           PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
       - name: create static build archive
-        run: zip -r static-build.zip build-static
-      - name: upload static build artifact
-        uses: actions/upload-artifact@v4
+        run: zip -r aec-static-build.zip build-static
+      - name: get package version
+        id: package-version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+      - name: upload to release
+        uses: softprops/action-gh-release@v2
         with:
-          name: static-build
-          path: static-build.zip
+          tag_name: app-v${{ steps.package-version.outputs.version }}
+          files: static-build.zip
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
