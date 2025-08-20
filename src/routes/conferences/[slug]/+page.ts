@@ -1,10 +1,11 @@
+import { PUBLIC_BUILD_TARGET } from "$env/static/public";
 import initPocketBase from "$lib/pocketbase";
 
-export const prerender = process.env.BUILD_TYPE === "static" ? true : false;
+export const prerender = PUBLIC_BUILD_TARGET === "static" ? true : false;
 
 // This function tells SvelteKit which dynamic routes to prerender
 export async function entries() {
-  const pb = initPocketBase("https://aecdemo.pockethost.io/");
+  const pb = initPocketBase();
 
   try {
     const conferences = await pb.collection("conferences").getList(1, 1000);

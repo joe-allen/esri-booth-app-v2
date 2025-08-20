@@ -1,5 +1,16 @@
 <script lang="ts">
+  import { PUBLIC_BUILD_TARGET } from "$env/static/public";
+  import { goto } from "$app/navigation";
+
   let { data } = $props();
+
+  function navigateToConference(id: string) {
+    if (PUBLIC_BUILD_TARGET === "static") {
+      window.location.href = `../conferences/${id}.html`;
+    } else {
+      goto(`../conferences/${id}`);
+    }
+  }
 </script>
 
 <h1>{data.industry.title}</h1>
@@ -7,7 +18,18 @@
   <h2>Conferences</h2>
   {#each data.conferencesByIndustry as item}
     <div>
-      <a href={`../conferences/${item.id}.html`}>{item.title}</a>
+      {#if PUBLIC_BUILD_TARGET === "static"}
+        <button
+          style="color: orange; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
+          onclick={() => navigateToConference(item.id)}
+        >
+          {item.title}
+        </button>
+      {:else}
+        <a style="color: #c00;" href={`../conferences/${item.id}`}
+          >{item.title} - ${item.id}</a
+        >
+      {/if}
     </div>
     <hr />
   {/each}

@@ -1,10 +1,12 @@
 import type { PageServerLoad } from "./$types";
+
+import { PUBLIC_BUILD_TARGET } from "$env/static/public";
 import initPocketBase from "$lib/pocketbase";
 
-export const prerender = process.env.BUILD_TYPE === "static" ? true : false;
+export const prerender = PUBLIC_BUILD_TARGET === "static" ? true : false;
 
 export const load: PageServerLoad = async ({ params }) => {
-  const pb = initPocketBase("https://aecdemo.pockethost.io/");
+  const pb = initPocketBase();
 
   try {
     const industry = await pb.collection("industries").getOne(params.slug);

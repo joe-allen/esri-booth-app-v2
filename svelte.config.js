@@ -11,10 +11,11 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: process.env.BUILD_TYPE === "static" ? undefined : 'index.html'
+      fallback: process.env.BUILD_TARGET === "static" ? undefined : 'index.html',
+      precompress: false
     }),
     paths: {
-      relative: true
+      base: process.env.BUILD_TARGET === 'static' ? '' : ''
     },
     prerender: {
       handleHttpError: 'warn',

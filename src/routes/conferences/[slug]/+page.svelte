@@ -1,6 +1,6 @@
 <script lang="ts">
   import initPocketBase from "$lib/pocketbase";
-  let pb = initPocketBase("https://aecdemo.pockethost.io/");
+  let pb = initPocketBase();
   let { data } = $props();
 </script>
 
