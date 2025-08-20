@@ -26,7 +26,7 @@ jobs:
           echo "BUILD_TARGET=static" >> $GITHUB_ENV
           echo "PUBLIC_BUILD_TARGET=static" >> $GITHUB_ENV
           echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
-          pnpm build
+          pnpm run build:static
         env:
           BUILD_TARGET: static
           PUBLIC_BUILD_TARGET: static
