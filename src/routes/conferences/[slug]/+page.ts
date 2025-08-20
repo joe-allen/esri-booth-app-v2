@@ -1,30 +1,18 @@
-import type { PageLoad } from "./$types";
-import initPocketBase from "$lib/pocketbase";
+import initPocketBase from '$lib/pocketbase';
 
-export const prerender = false;
-export const ssr = false;
+export const prerender = true;
 
-export const load: PageLoad = async ({ params }) => {
-  let pb: object | null = {};
-  let records: object = {};
-  let conference: object = {};
-  let conferenceImg: string = "";
-  let conferenceContent: object = {};
+// This function tells SvelteKit which dynamic routes to prerender
+export async function entries() {
+  const pb = initPocketBase("https://aecdemo.pockethost.io/");
 
-  pb = initPocketBase("https://aecdemo.pockethost.io/");
-
-  conference = await pb.collection("conferences").getOne(params.slug);
-  conferenceImg = conference.background_image
-    ? `${pb.baseURL}api/files/conferences/${conference.id}/${conference.background_image}`
-    : "";
-  records = await pb.collection("content").getList(1, 2000);
-  conferenceContent = records.items.filter((c) =>
-    c.conference.includes(params.slug)
-  );
-
-  return {
-    conference,
-    conferenceImg,
-    conferenceContent,
-  };
-};
+  try {
+    const conferences = await pb.collection("conferences").getList(1, 1000);
+    return conferences.items.map((conference) => ({
+      slug: conference.id
+    }));
+  } catch (error) {
+    console.error('Failed to fetch conferences for prerendering:', error);
+    return [];
+  }
+}

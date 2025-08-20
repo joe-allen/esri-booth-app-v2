@@ -1,30 +1,18 @@
-import type { PageLoad } from "./$types";
 import initPocketBase from "$lib/pocketbase";
 
-export const prerender = false;
-export const ssr = false;
+export const prerender = true;
 
-export const load: PageLoad = async ({ params }) => {
-  let pb: object | null = {};
-  let industry: object = {};
-  let industryImg: string = "";
-  let conferences: object = {};
-  let conferencesByIndustry: object = {};
+// This function tells SvelteKit which dynamic routes to prerender
+export async function entries() {
+  const pb = initPocketBase("https://aecdemo.pockethost.io/");
 
-  pb = initPocketBase("https://aecdemo.pockethost.io/");
-
-  industry = await pb.collection("industries").getOne(params.slug);
-  industryImg = industry.background_image
-    ? `${pb.baseURL}/api/files/industries/${industry.id}/${industry.background_image}`
-    : "";
-  conferences = await pb.collection("conferences").getList(1, 2000);
-  conferencesByIndustry = conferences.items.filter((c) =>
-    c.industries.includes(params.slug)
-  );
-
-  return {
-    industry,
-    industryImg,
-    conferencesByIndustry,
-  };
-};
+  try {
+    const industries = await pb.collection("industries").getList(1, 1000);
+    return industries.items.map((industry) => ({
+      slug: industry.id,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch industries for prerendering:", error);
+    return [];
+  }
+}

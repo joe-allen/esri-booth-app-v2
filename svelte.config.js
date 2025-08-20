@@ -15,6 +15,12 @@ const config = {
       handleHttpError: 'warn',
       handleMissingId: 'warn',
       entries: ['*'] // This ensures all static routes are prerendered
+    },
+    paths: {
+      base: process.argv.includes('dev') ? '' : '/Users/jos13577/Documents/Suitcase/customers/esri/aec_demo/app/build'
+    },
+    router: {
+      type: 'hash'
     }
   }
 };
