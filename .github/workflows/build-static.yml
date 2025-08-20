@@ -32,7 +32,7 @@ jobs:
           PUBLIC_BUILD_TARGET: static
           PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
       - name: create static build archive
-        run: zip -r aec-static-build.zip build-static
+        run: zip -r static-build.zip build-static
       - name: get package version
         id: package-version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
