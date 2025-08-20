@@ -5,7 +5,7 @@
   "identifier": "com.esri.aec-demo",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "BUILD_TARGET=tauri && pnpm build",
+    "beforeBuildCommand": "cross-env PUBLIC_BUILD_TARGET=tauri pnpm build",
     "devUrl": "http://localhost:5173",
     "frontendDist": "../build"
   },
