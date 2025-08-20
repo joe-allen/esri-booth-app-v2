@@ -1,6 +1,6 @@
-import initPocketBase from '$lib/pocketbase';
+import initPocketBase from "$lib/pocketbase";
 
-export const prerender = true;
+export const prerender = process.env.BUILD_TYPE === "static" ? true : false;
 
 // This function tells SvelteKit which dynamic routes to prerender
 export async function entries() {
@@ -9,10 +9,10 @@ export async function entries() {
   try {
     const conferences = await pb.collection("conferences").getList(1, 1000);
     return conferences.items.map((conference) => ({
-      slug: conference.id
+      slug: conference.id,
     }));
   } catch (error) {
-    console.error('Failed to fetch conferences for prerendering:', error);
+    console.error("Failed to fetch conferences for prerendering:", error);
     return [];
   }
 }

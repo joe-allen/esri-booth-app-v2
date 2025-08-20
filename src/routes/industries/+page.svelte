@@ -7,7 +7,7 @@
   {#each data.industries.items as record}
     <div>
       <!-- demo only: probably dont want to show ID anywhere in app -->
-      <p><a href={`industries/${record.id}`}>{record.title}</a></p>
+      <p><a href={`industries/${record.id}.html`}>{record.title}</a></p>
     </div>
   {/each}
 {/if}

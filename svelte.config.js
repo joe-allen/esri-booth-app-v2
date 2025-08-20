@@ -9,18 +9,17 @@ const config = {
 
   kit: {
     adapter: adapter({
-      fallback: 'index.html'
+      pages: 'build',
+      assets: 'build',
+      fallback: process.env.BUILD_TYPE === "static" ? undefined : 'index.html'
     }),
+    paths: {
+      relative: true
+    },
     prerender: {
       handleHttpError: 'warn',
       handleMissingId: 'warn',
       entries: ['*'] // This ensures all static routes are prerendered
-    },
-    paths: {
-      base: process.argv.includes('dev') ? '' : '/Users/jos13577/Documents/Suitcase/customers/esri/aec_demo/app/build'
-    },
-    router: {
-      type: 'hash'
     }
   }
 };

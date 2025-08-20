@@ -1,6 +1,6 @@
 import initPocketBase from "$lib/pocketbase";
 
-export const prerender = true;
+export const prerender = process.env.BUILD_TYPE === "static" ? true : false;
 
 // This function tells SvelteKit which dynamic routes to prerender
 export async function entries() {

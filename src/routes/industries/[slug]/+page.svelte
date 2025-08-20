@@ -7,7 +7,7 @@
   <h2>Conferences</h2>
   {#each data.conferencesByIndustry as item}
     <div>
-      <a href={`/conferences/${item.id}`}>{item.title}</a>
+      <a href={`../conferences/${item.id}.html`}>{item.title}</a>
     </div>
     <hr />
   {/each}

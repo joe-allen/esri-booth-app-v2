@@ -7,6 +7,7 @@
     "dev": "vite dev",
     "dev:tauri": "pnpm tauri dev",
     "build:tauri": "pnpm tauri build",
+    "build:static": "BUILD_TYPE=static vite build",
     "tauri": "tauri",
     "build": "vite build",
     "preview": "vite preview",

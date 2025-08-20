@@ -1,8 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import initPocketBase from "$lib/pocketbase";
 
-export const prerender = true;
-console.log("process.env.BASE_PATH", process.env.BASE_PATH);
+export const prerender = process.env.BUILD_TYPE === "static" ? true : false;
 
 export const load: PageServerLoad = async ({ params }) => {
   const pb = initPocketBase("https://aecdemo.pockethost.io/");

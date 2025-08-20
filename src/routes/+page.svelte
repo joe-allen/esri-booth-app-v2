@@ -1,1 +1,1 @@
-Welcome, select an <a href="industries">industry</a>.
+Welcome, select an <a href="industries.html">industry</a>.
