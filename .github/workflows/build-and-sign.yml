@@ -51,23 +51,3 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
           tauriScript: pnpm run tauri
-      - name: build static version
-        run: |
-          echo "PUBLIC_BUILD_TARGET=static" >> $GITHUB_ENV
-          echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
-          pnpm build
-        env:
-          PUBLIC_BUILD_TARGET: static
-          PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
-      - name: create static build archive
-        run: |
-          if [ "${{ matrix.platform }}" == "windows-latest" ]; then
-            powershell Compress-Archive -Path build-static -DestinationPath static-build-${{ matrix.platform }}.zip
-          else
-            zip -r static-build-${{ matrix.platform }}.zip build-static
-          fi
-      - name: upload static build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: static-build-${{ matrix.platform }}
-          path: static-build-${{ matrix.platform }}.zip

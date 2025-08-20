@@ -1,0 +1,38 @@
+name: "publish-static"
+on:
+  workflow_run:
+    workflows: ["publish"]
+    types:
+      - completed
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  build-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: install frontend dependencies
+        run: pnpm install
+      - name: build static version
+        run: |
+          echo "PUBLIC_BUILD_TARGET=static" >> $GITHUB_ENV
+          echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
+          pnpm build
+        env:
+          PUBLIC_BUILD_TARGET: static
+          PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
+      - name: create static build archive
+        run: zip -r static-build.zip build-static
+      - name: upload static build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-build
+          path: static-build.zip
