@@ -36,7 +36,7 @@
         </p>
       {:else}
         <a style="color: #c00;" href={`../conferences/${item.id}`}
-          >{item.title} - ${item.id}</a
+          >{item.title}</a
         >
       {/if}
     </div>
