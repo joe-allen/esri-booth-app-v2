@@ -4,16 +4,16 @@
   let { data } = $props();
 </script>
 
-<h1>Conference: {data.conference.title}</h1>
-{#if data.conferenceContent.length}
-  {#each data.conferenceContent as item}
+<h1>Engagement: {data.engagement.title}</h1>
+<!-- {#if data.engagementContent.length}
+  {#each data.engagementContent as item}
     <div
       style="display: flex; flex-direction: column; align-items: start; gap: .5rem;"
     >
       <p><strong>Content:</strong> {item.title}</p>
       <div style="display: flex; align-items: center; gap: .5rem;">
-        <strong>Intro:</strong>
-        {@html item.intro}
+        <strong>Description:</strong>
+        {@html item.description}
       </div>
       {#if item.file}
         <div style="display: flex; align-items: start; gap: .5rem;">
@@ -31,13 +31,13 @@
   {/each}
 {:else}
   <p>No content... Coming soon.</p>
-{/if}
+{/if} -->
 
-{#if data.conferenceImg}
+{#if data.engagementImg}
   <div
     style="display: flex; flex-direction: column; align-items: start; gap: .5rem;"
   >
-    <strong>Conference image:</strong>
-    <img src={data.conferenceImg} width="200" height="112" />
+    <strong>Engagement image:</strong>
+    <img src={data.engagementImg} width="200" height="112" />
   </div>
 {/if}

@@ -11,9 +11,11 @@ export enum Collections {
 	Mfas = "_mfas",
 	Otps = "_otps",
 	Superusers = "_superusers",
-	Conferences = "conferences",
-	Content = "content",
+	Engagements = "engagements",
 	Industries = "industries",
+	Links = "links",
+	Media = "media",
+	Tags = "tags",
 	Users = "users",
 }
 
@@ -21,11 +23,6 @@ export enum Collections {
 export type IsoDateString = string
 export type RecordIdString = string
 export type HTMLString = string
-
-export type GeoPoint = {
-	lon: number
-	lat: number
-}
 
 type ExpandType<T> = unknown extends T
 	? T extends unknown
@@ -98,7 +95,25 @@ export type SuperusersRecord = {
 	verified?: boolean
 }
 
-export type ConferencesRecord = {
+export type EngagementsRecord = {
+	archived?: boolean
+	background_image?: string
+	color_accent?: string
+	color_background?: string
+	color_primary?: string
+	color_secondary?: string
+	created?: IsoDateString
+	id: string
+	industries?: RecordIdString[]
+	links?: RecordIdString[]
+	media?: RecordIdString[]
+	tags?: RecordIdString[]
+	title?: string
+	updated?: IsoDateString
+}
+
+export type IndustriesRecord = {
+	archived?: boolean
 	background_image?: string
 	created?: IsoDateString
 	id: string
@@ -106,22 +121,32 @@ export type ConferencesRecord = {
 	updated?: IsoDateString
 }
 
-export type ContentRecord = {
+export type LinksRecord = {
 	archive?: boolean
-	conference?: RecordIdString[]
 	created?: IsoDateString
-	embedded?: boolean
-	file?: string
-	geopoint?: GeoPoint
 	id: string
-	intro?: HTMLString
 	title?: string
 	updated?: IsoDateString
 	url?: string
 }
 
-export type IndustriesRecord = {
+export type MediaRecord = {
+	archive?: boolean
 	created?: IsoDateString
+	description?: HTMLString
+	documents?: string[]
+	id: string
+	images?: string[]
+	related_links?: RecordIdString[]
+	title?: string
+	updated?: IsoDateString
+	videos?: string[]
+}
+
+export type TagsRecord = {
+	archived?: boolean
+	created?: IsoDateString
+	global?: boolean
 	id: string
 	title?: string
 	updated?: IsoDateString
@@ -146,9 +171,11 @@ export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRec
 export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemFields<Texpand>
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
-export type ConferencesResponse<Texpand = unknown> = Required<ConferencesRecord> & BaseSystemFields<Texpand>
-export type ContentResponse<Texpand = unknown> = Required<ContentRecord> & BaseSystemFields<Texpand>
+export type EngagementsResponse<Texpand = unknown> = Required<EngagementsRecord> & BaseSystemFields<Texpand>
 export type IndustriesResponse<Texpand = unknown> = Required<IndustriesRecord> & BaseSystemFields<Texpand>
+export type LinksResponse<Texpand = unknown> = Required<LinksRecord> & BaseSystemFields<Texpand>
+export type MediaResponse<Texpand = unknown> = Required<MediaRecord> & BaseSystemFields<Texpand>
+export type TagsResponse<Texpand = unknown> = Required<TagsRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -159,9 +186,11 @@ export type CollectionRecords = {
 	_mfas: MfasRecord
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
-	conferences: ConferencesRecord
-	content: ContentRecord
+	engagements: EngagementsRecord
 	industries: IndustriesRecord
+	links: LinksRecord
+	media: MediaRecord
+	tags: TagsRecord
 	users: UsersRecord
 }
 
@@ -171,9 +200,11 @@ export type CollectionResponses = {
 	_mfas: MfasResponse
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
-	conferences: ConferencesResponse
-	content: ContentResponse
+	engagements: EngagementsResponse
 	industries: IndustriesResponse
+	links: LinksResponse
+	media: MediaResponse
+	tags: TagsResponse
 	users: UsersResponse
 }
 
@@ -186,8 +217,10 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: '_mfas'): RecordService<MfasResponse>
 	collection(idOrName: '_otps'): RecordService<OtpsResponse>
 	collection(idOrName: '_superusers'): RecordService<SuperusersResponse>
-	collection(idOrName: 'conferences'): RecordService<ConferencesResponse>
-	collection(idOrName: 'content'): RecordService<ContentResponse>
+	collection(idOrName: 'engagements'): RecordService<EngagementsResponse>
 	collection(idOrName: 'industries'): RecordService<IndustriesResponse>
+	collection(idOrName: 'links'): RecordService<LinksResponse>
+	collection(idOrName: 'media'): RecordService<MediaResponse>
+	collection(idOrName: 'tags'): RecordService<TagsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }

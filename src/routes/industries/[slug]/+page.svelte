@@ -4,24 +4,24 @@
 
   let { data } = $props();
 
-  function navigateToConference(id: string) {
+  function navigateToEngagement(id: string) {
     if (PUBLIC_BUILD_TARGET === "tauri") {
-      window.location.href = `../conferences/${id}.html`;
+      window.location.href = `../engagements/${id}.html`;
     } else {
-      goto(`../conferences/${id}`);
+      goto(`../engagements/${id}`);
     }
   }
 </script>
 
 <h1>{data.industry.title}</h1>
-{#if data.conferencesByIndustry.length}
-  <h2>Conferences</h2>
-  {#each data.conferencesByIndustry as item}
+{#if data.engagementsByIndustry.length}
+  <h2>engagements</h2>
+  {#each data.engagementsByIndustry as item}
     <div>
       {#if PUBLIC_BUILD_TARGET === "tauri"}
         <button
           style="color: orange; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
-          onclick={() => navigateToConference(item.id)}
+          onclick={() => navigateToEngagement(item.id)}
         >
           {item.title}
         </button>
@@ -29,13 +29,13 @@
         <p>
           <a
             style="color: green; text-decoration: underline; cursor: pointer;"
-            href="../conferences/{item.id}.html"
+            href="../engagements/{item.id}.html"
           >
             {item.title}
           </a>
         </p>
       {:else}
-        <a style="color: #c00;" href={`../conferences/${item.id}`}
+        <a style="color: #c00;" href={`../engagements/${item.id}`}
           >{item.title}</a
         >
       {/if}

@@ -11,12 +11,12 @@ export async function entries() {
   const pb = initPocketBase();
 
   try {
-    const conferences = await pb.collection("conferences").getList(1, 1000);
-    return conferences.items.map((conference) => ({
-      slug: conference.id,
+    const engagements = await pb.collection("engagements").getList(1, 1000);
+    return engagements.items.map((engagement) => ({
+      slug: engagement.id,
     }));
   } catch (error) {
-    console.error("Failed to fetch conferences for prerendering:", error);
+    console.error("Failed to fetch engagements for prerendering:", error);
     return [];
   }
 }

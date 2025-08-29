@@ -17,15 +17,15 @@ export const load: PageServerLoad = async ({ params }) => {
       ? `${pb.baseURL}/api/files/industries/${industry.id}/${industry.background_image}`
       : "";
 
-    const conferences = await pb.collection("conferences").getList(1, 2000);
-    const conferencesByIndustry = conferences.items.filter((c) =>
+    const engagements = await pb.collection("engagements").getList(1, 2000);
+    const engagementsByIndustry = engagements.items.filter((c) =>
       c.industries.includes(params.slug)
     );
 
     return {
       industry,
       industryImg,
-      conferencesByIndustry,
+      engagementsByIndustry,
     };
   } catch (error) {
     console.error("Failed to load industry data:", error);

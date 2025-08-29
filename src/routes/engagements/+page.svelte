@@ -2,12 +2,12 @@
   let { data } = $props();
 </script>
 
-<h1>Conferences</h1>
-{#if data.conferences}
-  {#each data.conferences.items as record}
+<h1>engagements</h1>
+{#if data.engagements}
+  {#each data.engagements.items as record}
     <div>
       <!-- demo only: probably dont want to show ID anywhere in app -->
-      <p><a href={`conferences/${record.id}`}>{record.title}</a></p>
+      <p><a href={`engagements/${record.id}`}>{record.title}</a></p>
     </div>
   {/each}
 {/if}

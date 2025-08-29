@@ -3,7 +3,7 @@ import initPocketBase from "$lib/pocketbase";
 
 export const load: LayoutServerLoad = async (event) => {
   let pb: object | null = {};
-  let conferences: object = {};
+  let engagements: object = {};
   let industries: object = {};
 
   // if (navigator.onLine) {
@@ -14,10 +14,10 @@ export const load: LayoutServerLoad = async (event) => {
   pb = initPocketBase();
 
   industries = await pb.collection("industries").getList(1, 200);
-  conferences = await pb.collection("conferences").getList(1, 200);
+  engagements = await pb.collection("engagements").getList(1, 200);
 
   return {
     industries,
-    conferences,
+    engagements,
   };
 };
