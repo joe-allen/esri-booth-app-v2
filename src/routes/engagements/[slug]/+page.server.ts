@@ -12,24 +12,18 @@ export const load: PageServerLoad = async ({ params }) => {
   const pb = initPocketBase();
 
   try {
-    const engagements = await pb.collection("engagements").getOne(params.slug);
-    const engagementsImg = engagements.background_image
-      ? `${pb.baseURL}api/files/engagements/${engagements.id}/${engagements.background_image}`
-      : "";
-      
-      const links = await pb.collection("links").getList(1, 2000);
-      const engagementsLinks = links.items.filter((c) =>
-        c.engagements.includes(params.slug)
-    );
-console.log("engagementsLinks", engagementsLinks);
+    const engagement = await pb.collection("engagements").getOne(params.slug, {
+      expand: 'links, media, tags'
+    });
+    const engagementBgImg = engagement.background_image
+			? `${pb.baseURL}api/files/engagements/${engagement.id}/${engagement.background_image}`
+			: '';
 
-    // return {
-    //   engagements,
-    //   engagementsImg,
-    //   engagementsLinks,
-    // };
+    return {
+      engagement,
+      engagementBgImg
+    };
 
-    return;
   } catch (error) {
     console.error("Failed to load engagements data:", error);
     throw error;
