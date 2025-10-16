@@ -4,6 +4,17 @@ pnpm-lock.yaml
 yarn.lock
 bun.lock
 bun.lockb
+node_modules
 
 # Miscellaneous
 /static/
+
+# Output
+/src-tauri/
+/build/
+/build-static/
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit

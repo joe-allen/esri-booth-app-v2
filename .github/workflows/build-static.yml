@@ -1,7 +1,7 @@
-name: "publish-static"
+name: 'publish-static'
 on:
   workflow_run:
-    workflows: ["publish"]
+    workflows: ['publish']
     types:
       - completed
   workflow_dispatch: # Allow manual trigger

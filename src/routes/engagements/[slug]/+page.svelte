@@ -1,7 +1,8 @@
 <script lang="ts">
-	import initPocketBase from '$lib/pocketbase';
-	let pb = initPocketBase();
-	let { data } = $props();
+	// import type { CollectionResponses } from "$lib/pocketbase/pocketbase-types";
+
+
+	let { data }= $props();
 	console.log('data', data);
 </script>
 
@@ -9,7 +10,7 @@
 <h2>Links:</h2>
 <ul>
 	{#each data.engagement.expand.links as link}
-	<li><a href={link.url} rel="nofollow noopener" target="_blank">{link.title}</a></li>
+		<li><a href={link.url} rel="nofollow noopener" target="_blank">{link.title}</a></li>
 	{/each}
 </ul>
 <h2>Media:</h2>

@@ -18,9 +18,13 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"typegen": "npx pocketbase-typegen --env --out ./src/lib/pocketbase/pocketbase-types.ts",
 		"lint": "eslint . && prettier --check .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"config": "SUPPRESS_NO_CONFIG_WARNING=true node ./.config/init-sv-arcgis.js"
 	},
 	"dependencies": {
+		"@arcgis/core": "^4.33.14",
+		"@arcgis/map-components": "^4.33.24",
+		"@esri/calcite-components": "^3.3.3",
 		"@tauri-apps/api": "^2",
 		"@tauri-apps/plugin-opener": "^2",
 		"pocketbase": "^0.26.2"
@@ -33,13 +37,15 @@
 		"@sveltejs/kit": "^2.22.0",
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
 		"@tauri-apps/cli": "^2",
-		"cross-env": "^7.0.3",
+		"chalk": "5.4.1",
+		"cross-env": "^10.0.0",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
 		"globals": "^16.0.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
+		"prompts": "2.4.2",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
