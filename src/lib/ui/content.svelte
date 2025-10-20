@@ -3,7 +3,7 @@
 		children,
 		cn,
 		sidePanelIsVisible
-	}: { children: any; cn?: string; sidePanelIsVisible: boolean } = $props();
+	}: { children: any; cn?: string; sidePanelIsVisible?: boolean } = $props();
 </script>
 
 <section class={[cn, sidePanelIsVisible ? 'main-content-w-full' : '']}>
