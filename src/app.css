@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+@import '@esri/calcite-components/dist/calcite/calcite.css';
+
+:root {
+	--app-header-height: 112px;
+	--app-main-height: calc(100vh - var(--app-header-height));
+
+	/* calcite overrides */
+	--calcite-input-border-color: transparent;
+	--calcite-combobox-input-border-color: transparent;
+	--calcite-card-border-color: transparent;
+	--calcite-card-border-width: 0px;
+	--calcite-internal-button-padding-x: 7px !important;
+}
+
+@layer base {
+	html,
+	body {
+		max-height: 100dvb;
+		overflow: hidden;
+	}
+
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--calcite-color-brand);
+	}
+}

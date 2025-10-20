@@ -5,9 +5,7 @@
 	let { data } = $props();
 
 	function navigateToIndustry(id: string) {
-		console.log('outside');
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
-			console.log('inside');
 			window.location.href = `industries/${id}.html`;
 		} else {
 			goto(`industries/${id}`);

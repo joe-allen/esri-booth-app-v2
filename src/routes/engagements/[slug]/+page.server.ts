@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	try {
 		const engagement = await pb?.collection('engagements').getOne(params.slug, {
-			expand: 'links, media, tags'
+			expand: 'links, media, media.tags, tags'
 		});
 		const engagementBgImg = engagement?.background_image
 			? `${pb?.baseURL}api/files/engagements/${engagement?.id}/${engagement?.background_image}`
