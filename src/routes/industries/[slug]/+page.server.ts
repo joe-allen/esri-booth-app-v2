@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	try {
 		const industry = await pb.collection('industries').getOne(params.slug);
 		const industryImg = industry.background_image
-			? `${PUBLIC_BUILD_TARGET}api/files/industries/${industry.id}/${industry.background_image}`
+			? `${PUBLIC_BUILD_TARGET}api/files/${industry.collectionName}/${industry.id}/${industry.background_image}`
 			: '';
 
 		const engagements = await pb.collection('engagements').getList(1, 2000, { expand: 'tags' });

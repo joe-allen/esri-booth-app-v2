@@ -1,10 +1,15 @@
 <script lang="ts">
-	let { children, sidePanelIsVisible } = $props();
+	// svelte
+	import { fade } from 'svelte/transition';
+
+	let { children, sidebarDemosIsVisible } = $props();
 </script>
 
-<section class={sidePanelIsVisible ? 'side-panel-closed' : ''}>
-	{@render children?.()}
-</section>
+{#if sidebarDemosIsVisible}
+	<section transition:fade class={`e-sidepanel--demos ${sidebarDemosIsVisible ? '' : 'hide'}`}>
+		{@render children?.()}
+	</section>
+{/if}
 
 <style>
 	section {
@@ -21,6 +26,7 @@
 		opacity: 1;
 		transition:
 			clip-path 0.1s ease-out,
+			display 0.2s allow-discrete,
 			opacity 0.2s ease-out;
 
 		&:hover {
@@ -32,9 +38,13 @@
 			clip-path: inset(0 100% 0 0);
 		}
 
-		&.side-panel-closed {
+		&.e-sidepanel--demos.hide {
 			opacity: 0;
 			clip-path: inset(0 100% 0 0);
+			transition:
+				clip-path 0.1s ease-out,
+				display 0.2s allow-discrete,
+				opacity 0.2s ease-out;
 		}
 	}
 </style>

@@ -3,10 +3,9 @@
 	import { goto } from '$app/navigation';
 
 	// ui
-	import { SidepanelIndustries, Content } from '$lib';
+	import { SidebarList, Content } from '$lib';
 
 	let { data } = $props();
-	// import data from './assets/content/industries.json';
 
 	function navigateToIndustry(id: string) {
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
@@ -25,7 +24,7 @@
 	<a href="industries">industry</a>.
 {/if} -->
 
-<SidepanelIndustries {data} />
+<SidebarList results={data.industries.items} />
 <Content cn="pt-6">
 	<h1 class="text-white">HOME - Ideas for this state (when no industry is selected).</h1>
 </Content>

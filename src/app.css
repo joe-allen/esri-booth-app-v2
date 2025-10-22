@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import '@esri/calcite-components/dist/calcite/calcite.css';
 
 :root {
 	--app-header-height: 112px;

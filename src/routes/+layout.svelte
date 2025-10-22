@@ -114,12 +114,27 @@
 		@media screen and (width <= 1024px) {
 			grid-template-columns: 0 1fr;
 			gap: 0;
-			/* padding-inline: 2rem; */
 		}
 	}
 
-	:global(main:has(.main-content-w-full)) {
-		grid-template-columns: 0 1fr;
+	:global(main:has(.e-video)) {
+		grid-template-columns: 1fr;
 		gap: 0;
+	}
+
+	:global(main:has(.e-sidepanel--demos + .e-video)) {
+		grid-template-columns: clamp(250px, 15vw, 500px) 1fr;
+		gap: calc(4rem - 8px);
+	}
+
+	:global(main:has(.e-video + .e-sidepanel--details)) {
+		grid-template-columns: 1fr clamp(250px, 15vw, 500px);
+		gap: calc(4rem - 8px);
+	}
+
+	/* used bc both can be visible during the in/ out transitions */
+	:global(main:has(.e-sidepanel--demos + .e-video + .e-sidepanel--details)) {
+		grid-template-columns: clamp(250px, 15vw, 500px) 1fr clamp(250px, 15vw, 500px);
+		gap: calc(4rem - 8px);
 	}
 </style>
