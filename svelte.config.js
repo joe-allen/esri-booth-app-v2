@@ -21,8 +21,8 @@ const config = {
 			base: process.env.BUILD_TARGET === 'tauri' ? '' : ''
 		},
 		prerender: {
-			handleHttpError: 'warn',
-			handleMissingId: 'warn',
+			handleHttpError: 'ignore',
+			handleMissingId: 'ignore',
 			entries: ['*'] // This ensures all static routes are prerendered
 		}
 	}

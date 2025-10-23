@@ -2,8 +2,6 @@
 	import { page } from '$app/state';
 	import { showDemoDetails } from '$lib/state.svelte';
 	let { handleSearchInput } = $props();
-
-	console.log('page', page);
 </script>
 
 <header>

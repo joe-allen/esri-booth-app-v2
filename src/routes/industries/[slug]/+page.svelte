@@ -60,14 +60,14 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<!-- <a class="cursor-pointer" href={`/tags/${tag.slug}`}>
+										<a class="cursor-pointer" href={`/tags/${tag.slug}`}>
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"
 												value="calcite chip"
 												scale="s">{tag.title}</calcite-chip
 											>
-										</a> -->
+										</a>
 									{/each}
 								</div>
 							{/if}
@@ -102,14 +102,14 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<!-- <a class="cursor-pointer" href={`/tags/${tag.slug}`}>
+										<a class="cursor-pointer" href={`/tags/${tag.slug}`}>
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"
 												value="calcite chip"
 												scale="s">{tag.title}</calcite-chip
 											>
-										</a> -->
+										</a>
 									{/each}
 								</div>
 							{/if}
