@@ -42,7 +42,7 @@
 							<img
 								alt={item.title}
 								class="aspect-video object-cover"
-								src={`${PUBLIC_POCKETBASE_URL}api/files/media/${item.id}/${item.background_image}`}
+								src={`${PUBLIC_POCKETBASE_URL}api/files/media/${item.id}/${item.image}`}
 							/>
 						</button>
 

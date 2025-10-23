@@ -9,10 +9,9 @@ export async function entries() {
 	const pb = initPocketBase();
 
 	try {
-		const tags = await pb.collection('tags').getList(1, 1000);
-		return tags.items.map((tag) => ({
-			slug: tag.title
-		}));
+		// const tags = await pb?.collection('tags').getList(1, 100);
+		const tags = await pb?.collection('tags').getFullList({ sort: 'title' });
+		return tags?.map((tag) => ({ slug: tag.slug })) || [];
 	} catch (error) {
 		console.error('Failed to fetch tags for prerendering:', error);
 		return [];

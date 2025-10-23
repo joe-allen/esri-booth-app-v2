@@ -1,7 +1,7 @@
 {
-	"name": "aec-demo-mac",
+	"name": "esri-demos",
 	"private": true,
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"type": "module",
 	"scripts": {
 		"dev": "cp .env.dev .env && vite dev",

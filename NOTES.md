@@ -18,9 +18,11 @@
 
 ### Latest updates
 
+- Video delay between Demos (= 2s)
 - Video toggle actions fade out after 5 secs
-- ¿Search?
 - Video actions: pause, play, loop
 - Sidepanels cannot be open at same time. only 1 allowed.
 - Filtering by tags (layout is like engagements - (tags on left))
 - Admin: Drag / drop functionality of related items (e.g. links, documents)
+
+- TODO: Global Search?

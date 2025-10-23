@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ params }) => {
 			? `${PUBLIC_BUILD_TARGET}api/files/${industry.collectionName}/${industry.id}/${industry.background_image}`
 			: '';
 
-		const engagements = await pb.collection('engagements').getList(1, 2000, { expand: 'tags' });
+		const engagements = await pb.collection('engagements').getList(1, 100, { expand: 'tags' });
 		const engagementsByIndustry = engagements.items.filter((c) =>
 			c.industries.includes(params.slug)
 		);

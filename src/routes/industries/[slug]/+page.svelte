@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { PUBLIC_BUILD_TARGET } from '$env/static/public';
+	// config
+	import { PUBLIC_BUILD_TARGET, PUBLIC_POCKETBASE_URL } from '$env/static/public';
+
+	// svelte
 	import { goto } from '$app/navigation';
 
 	// ui
 	import { SidebarList, Content } from '$lib';
-
-	// api
-	import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 
 	let { data } = $props();
 
@@ -15,6 +15,15 @@
 			window.location.href = `../engagements/${id}.html`;
 		} else {
 			goto(`../engagements/${id}`);
+		}
+	}
+
+	function handleRoute(slug: string) {
+		console.log('slug', slug);
+		if (PUBLIC_BUILD_TARGET === 'tauri') {
+			window.location.href = `/tags/${slug}.html`;
+		} else {
+			goto(`/tags/${slug}`);
 		}
 	}
 </script>
@@ -60,14 +69,14 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<a class="cursor-pointer" href={`/tags/${tag.slug}`}>
+										<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"
 												value="calcite chip"
 												scale="s">{tag.title}</calcite-chip
 											>
-										</a>
+										</button>
 									{/each}
 								</div>
 							{/if}
@@ -102,14 +111,14 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<a class="cursor-pointer" href={`/tags/${tag.slug}`}>
+										<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"
 												value="calcite chip"
 												scale="s">{tag.title}</calcite-chip
 											>
-										</a>
+										</button>
 									{/each}
 								</div>
 							{/if}

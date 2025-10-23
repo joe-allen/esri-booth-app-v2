@@ -9,7 +9,7 @@ export async function entries() {
 	const pb = initPocketBase();
 
 	try {
-		const media = await pb.collection('media').getList(1, 1000);
+		const media = await pb.collection('media').getList(1, 100);
 		return media.items.map((mediaItem) => ({
 			slug: mediaItem.id
 		}));

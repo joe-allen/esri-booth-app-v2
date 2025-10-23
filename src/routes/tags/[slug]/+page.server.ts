@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	try {
 		const tag = await pb?.collection('tags').getFirstListItem(`slug = "${params.slug}"`);
 		const tags = await pb?.collection('tags').getFullList({ sort: 'title' });
-		const media = await pb?.collection('media').getList(1, 2000, { expand: 'tags' });
+		const media = await pb?.collection('media').getList(1, 100, { expand: 'tags' });
 		const mediaByTag = media?.items.filter((e) => e?.tags.includes(tag.id));
 
 		return {

@@ -9,7 +9,7 @@ export async function entries() {
 	const pb = initPocketBase();
 
 	try {
-		const industries = await pb.collection('industries').getList(1, 1000);
+		const industries = await pb.collection('industries').getList(1, 100);
 		return industries.items.map((industry) => ({
 			slug: industry.id
 		}));

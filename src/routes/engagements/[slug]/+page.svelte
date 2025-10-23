@@ -20,9 +20,13 @@
 	let videoPlayerIsPaused = $state(false);
 	let videoPlayerIsLooping = $state(false);
 	let videoPlayerShowActions = $state(true);
+	let videoPlayerDelayBetweenDemos = $state(2000);
+	let videoPlayerDuration = $state(0);
+	let videoPlayerProgress = $state(0);
+	let videoProgressIntervalId: ReturnType<typeof setInterval>;
 
-	let sidebarDemosIsVisible = $state(false);
-	let sidePanelDetailsIsVisible = $state(true);
+	let sidebarDemosIsVisible = $state(true);
+	let sidePanelDetailsIsVisible = $state(false);
 
 	let currentDemo = $state(0);
 	let selectedDemo = $state({});
@@ -37,6 +41,7 @@
 		// check to show showDemoDetails or not
 		if (window.localStorage.getItem('showDemoDetails') === 'true') {
 			showDemoDetails.hide = false;
+			updateShowDemoDetails(selectedDemo);
 		}
 	});
 
@@ -56,21 +61,46 @@
 		// set default selected demo to first video
 		selectedDemo = activeVideos[currentDemo];
 
+		if (!showDemoDetails.hide) {
+			updateShowDemoDetails(selectedDemo);
+		}
+
 		// find all unique tags (Set), sort them
 		filterableValues = Array.from(new Set(activeTags.map((tag) => tag.title))).sort();
 	}
 
-	function handleAutoPlay() {
+	async function handleVideoAutoPlay() {
 		if (currentDemo === activeVideos.length - 1) {
 			currentDemo = 0;
+			videoPlayer.play();
 		} else {
 			if (!videoPlayerIsLooping) {
+				const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+				await delay(videoPlayerDelayBetweenDemos);
 				currentDemo = currentDemo + 1;
 			}
 		}
 
 		selectedDemo = activeVideos[currentDemo];
 		updateShowDemoDetails(selectedDemo);
+	}
+
+	function handleVideoProgress(event) {
+		videoPlayerDuration = videoPlayer.duration;
+		// console.log('videoPlayerDuration', videoPlayerDuration);
+		console.log('event', event);
+		console.log('videoPlayerDuration', videoPlayerDuration);
+
+		console.log('interval', videoProgressIntervalId);
+		if (videoProgressIntervalId) {
+			clearInterval(videoProgressIntervalId);
+		}
+
+		videoProgressIntervalId = setInterval(() => {
+			let currentTime = videoPlayer.currentTime;
+			videoPlayerProgress = (currentTime / videoPlayerDuration) * 1;
+			console.log('videoPlayerProgress', videoPlayerProgress);
+		}, 500);
 	}
 
 	function handleButtonPlay(i) {
@@ -103,6 +133,7 @@
 	function handleComboboxFilter(event) {
 		let selectedVideosByTag = [];
 
+		activeVideos = data.engagement.expand.media.filter((video) => video.video && !video.archived);
 		if (event.target.value === '') {
 			activeVideos = data.engagement.expand.media.filter((video) => video.video && !video.archived);
 			return;
@@ -117,6 +148,7 @@
 		});
 
 		activeVideos = selectedVideosByTag;
+		console.log('selectedVideosByTag', selectedVideosByTag);
 		// filterValue = event.target.value;
 	}
 
@@ -193,10 +225,10 @@
 						{:else}
 							<img
 								class=""
-								src="https://place-hold.it/300x169/"
+								src="https://dummyimage.com/300x169/141414/fff"
 								alt="placeholder 300x168"
-								width="400"
-								height="200"
+								width="300"
+								height="168"
 							/>
 						{/if}
 					</button>
@@ -210,10 +242,10 @@
 						</button>
 					</span>
 					<div slot="footer-end" class="w-full">
-						{#if item.expand.tags.length}
-							{#if item.expand.tags.length > 2}
+						{#if item.tags.length}
+							{#if item.expand.tags.length > 3}
 								<calcite-chip class="flex items-center" kind="brand" value="calcite chip" scale="s"
-									>2+</calcite-chip
+									>3+</calcite-chip
 								>
 							{:else}
 								<div class="flex flex-wrap gap-1">
@@ -246,7 +278,8 @@
 			autoplay
 			class="mx-auto h-full w-auto"
 			bind:this={videoPlayer}
-			onended={handleAutoPlay}
+			onended={handleVideoAutoPlay}
+			onprogress={handleVideoProgress}
 		>
 			<track kind="captions" src="" srclang="en" label="English captions" />
 		</video>
@@ -324,6 +357,16 @@
 
 				<!-- <calcite-fab icon="full-screen"></calcite-fab> -->
 			</section>
+		{/if}
+		{#if !showDemoDetails.hide}
+			<secition
+				class="e-video__progress-bar absolute bottom-0 left-0 h-0.5 w-full bg-[var(--calcite-color-text-2)]"
+			>
+				<div
+					class="e-video__progress-bar-fill h-full w-full scale-x-0 bg-[var(--calcite-color-brand)]"
+					style={`--video-progress: ${videoPlayerProgress}`}
+				></div>
+			</secition>
 		{/if}
 	</div>
 </Content>
@@ -408,6 +451,15 @@
 		overflow: hidden;
 		border-radius: 0;
 		box-shadow: 2px 4px 24px rgba(0, 0, 0, 0.25);
+	}
+
+	:global(.e-video__progress-bar-fill) {
+		width: 100%;
+		height: 100%;
+		transform-origin: left center;
+		transition: scale 0.1s ease-out;
+		/* scale: 0.5 1; */
+		scale: var(--video-progress, 0%) 1;
 	}
 
 	:global(body:has(calcite-combobox-item[selected]) calcite-combobox),

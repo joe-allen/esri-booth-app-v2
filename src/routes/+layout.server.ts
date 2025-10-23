@@ -13,8 +13,8 @@ export const load: LayoutServerLoad = async (event) => {
 	// }
 	pb = initPocketBase();
 
-	industries = await pb.collection('industries').getList(1, 200);
-	engagements = await pb.collection('engagements').getList(1, 200);
+	industries = await pb.collection('industries').getList(1, 100);
+	engagements = await pb.collection('engagements').getList(1, 100, { expand: 'tags' });
 
 	return {
 		industries,
