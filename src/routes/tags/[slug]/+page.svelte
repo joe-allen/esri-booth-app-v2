@@ -10,7 +10,7 @@
 
 	let { data } = $props();
 
-	function handleRoute(id: string) {
+	function handleMediaRoute(id: string) {
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
 			window.location.href = `../media/${id}.html`;
 		} else {
@@ -28,14 +28,14 @@
 				{#if PUBLIC_BUILD_TARGET === 'tauri'}
 					<button
 						style="color: orange; background: none; border: none; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;"
-						onclick={() => handleRoute(item.id)}
+						onclick={() => handleMediaRoute(item.id)}
 					>
 						{item.title}
 					</button>
 				{:else if PUBLIC_BUILD_TARGET === 'static'}
 					<calcite-card label={item.title}>
 						<button
-							onclick={() => handleRoute(item.id)}
+							onclick={() => handleMediaRoute(item.id)}
 							class="cursor-pointer border-none bg-transparent text-left"
 							slot="thumbnail"
 						>
@@ -48,7 +48,7 @@
 
 						<span slot="heading">
 							<button
-								onclick={() => handleRoute(item.id)}
+								onclick={() => handleMediaRoute(item.id)}
 								class="bg-tranparent w-full cursor-pointer border-none text-left"
 							>
 								{item.title}
@@ -61,7 +61,7 @@
 				{:else}
 					<calcite-card label={item.title}>
 						<button
-							onclick={() => handleRoute(item.id)}
+							onclick={() => handleMediaRoute(item.id)}
 							class="cursor-pointer border-none bg-transparent text-left"
 							slot="thumbnail"
 						>
@@ -74,7 +74,7 @@
 
 						<span slot="heading">
 							<button
-								onclick={() => handleRoute(item.id)}
+								onclick={() => handleMediaRoute(item.id)}
 								class="bg-tranparent w-full cursor-pointer border-none text-left"
 							>
 								{item.title}

@@ -1,5 +1,10 @@
-import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
+// Dynamically import the appropriate adapter based on BUILD_TARGET
+const adapter =
+	process.env.BUILD_TARGET === 'static' || process.env.BUILD_TARGET === 'tauri'
+		? (await import('@sveltejs/adapter-static')).default
+		: (await import('@sveltejs/adapter-vercel')).default;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

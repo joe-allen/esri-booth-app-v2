@@ -18,7 +18,7 @@
 		}
 	}
 
-	function handleRoute(slug: string) {
+	function handleTagRoute(slug: string) {
 		console.log('slug', slug);
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
 			window.location.href = `/tags/${slug}.html`;
@@ -69,7 +69,7 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
+										<button onclick={() => handleTagRoute(tag.slug)} class="cursor-pointer">
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"
@@ -111,7 +111,7 @@
 							{#if item.tags.length}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as tag}
-										<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
+										<button onclick={() => handleTagRoute(tag.slug)} class="cursor-pointer">
 											<calcite-chip
 												kind="brand"
 												class="flex cursor-pointer items-center"

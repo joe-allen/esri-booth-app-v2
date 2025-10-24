@@ -10,6 +10,7 @@
 	--calcite-card-border-color: transparent;
 	--calcite-card-border-width: 0px;
 	--calcite-internal-button-padding-x: 7px !important;
+	--calcite-border-width-3: 0 !important;
 }
 
 @layer base {

@@ -27,12 +27,12 @@ jobs:
         run: |
           echo "BUILD_TARGET=static" >> $GITHUB_ENV
           echo "PUBLIC_BUILD_TARGET=static" >> $GITHUB_ENV
-          echo "PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/" >> $GITHUB_ENV
+          echo "PUBLIC_POCKETBASE_URL=https://esri-demos.pockethost.io/" >> $GITHUB_ENV
           pnpm build
         env:
           BUILD_TARGET: static
           PUBLIC_BUILD_TARGET: static
-          PUBLIC_POCKETBASE_URL: https://aecdemo.pockethost.io/
+          PUBLIC_POCKETBASE_URL: https://esri-demos.pockethost.io/
       - name: get package version
         id: package-version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT

@@ -9,24 +9,23 @@
 	import { SidebarList, Content } from '$lib';
 
 	let { data } = $props();
-	console.log('data', data.engagements);
 
-	function navigateToIndustry(id: string) {
+	function handleEngagementRoute(id: string) {
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
-			window.location.href = `industries/${id}.html`;
+			window.location.href = `../engagements/${id}.html`;
 		} else {
-			goto(`industries/${id}`);
+			goto(`../engagements/${id}`);
+		}
+	}
+
+	function handleTagRoute(slug: string) {
+		if (PUBLIC_BUILD_TARGET === 'tauri') {
+			window.location.href = `/tags/${slug}.html`;
+		} else {
+			goto(`/tags/${slug}`);
 		}
 	}
 </script>
-
-<!-- THIS WONT WORK ON TAURI DEV: -->
-<!-- Welcome, select an
-{#if PUBLIC_BUILD_TARGET === 'tauri' || PUBLIC_BUILD_TARGET === 'static'}
-	<a href="industries.html">industry.html</a>.
-{:else}
-	<a href="industries">industry</a>.
-{/if} -->
 
 <SidebarList results={data.industries.items} />
 <Content cn="pt-6">
@@ -77,7 +76,7 @@
 								{:else}
 									<div class="flex flex-wrap gap-1">
 										{#each item.expand.tags as tag}
-											<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
+											<button onclick={() => handleTagRoute(tag.slug)} class="cursor-pointer">
 												<calcite-chip
 													kind="brand"
 													class="flex cursor-pointer items-center"
@@ -95,7 +94,7 @@
 					<calcite-card label={item.title}>
 						<button
 							onclick={() => handleEngagementRoute(item.id)}
-							class="cursor-pointer border-none bg-transparent text-left"
+							class="w-full cursor-pointer border-none bg-transparent text-left"
 							slot="thumbnail"
 						>
 							{#if item.background_image}
@@ -106,7 +105,7 @@
 								/>
 							{:else}
 								<img
-									class=""
+									class="aspect-video w-full object-cover"
 									src="https://dummyimage.com/300x169/141414/fff"
 									alt="placeholder 300x168"
 									width="300"
@@ -138,7 +137,7 @@
 								{:else}
 									<div class="flex flex-wrap gap-1">
 										{#each item.expand.tags as tag}
-											<button onclick={() => handleRoute(tag.slug)} class="cursor-pointer">
+											<button onclick={() => handleTagRoute(tag.slug)} class="cursor-pointer">
 												<calcite-chip
 													kind="brand"
 													class="flex cursor-pointer items-center"

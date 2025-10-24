@@ -85,13 +85,9 @@
 		updateShowDemoDetails(selectedDemo);
 	}
 
-	function handleVideoProgress(event) {
+	function handleVideoProgress() {
 		videoPlayerDuration = videoPlayer.duration;
-		// console.log('videoPlayerDuration', videoPlayerDuration);
-		console.log('event', event);
-		console.log('videoPlayerDuration', videoPlayerDuration);
 
-		console.log('interval', videoProgressIntervalId);
 		if (videoProgressIntervalId) {
 			clearInterval(videoProgressIntervalId);
 		}
@@ -99,7 +95,6 @@
 		videoProgressIntervalId = setInterval(() => {
 			let currentTime = videoPlayer.currentTime;
 			videoPlayerProgress = (currentTime / videoPlayerDuration) * 1;
-			console.log('videoPlayerProgress', videoPlayerProgress);
 		}, 500);
 	}
 
@@ -140,11 +135,14 @@
 		}
 
 		activeVideos.forEach((video) => {
-			video.expand?.tags.map((tag) => {
-				if (tag.title === event.target.value) {
-					selectedVideosByTag.push(video);
-				}
-			});
+			console.log('activeVideos', video.expand?.tags);
+			if (video.expand?.tags) {
+				video.expand?.tags.map((tag) => {
+					if (tag.title === event.target.value) {
+						selectedVideosByTag.push(video);
+					}
+				});
+			}
 		});
 
 		activeVideos = selectedVideosByTag;
@@ -180,7 +178,7 @@
 		showDemoDetails.tags = selectedDemo.expand.tags;
 	}
 
-	function handleRoute(slug: string) {
+	function handleTagRoute(slug: string) {
 		if (PUBLIC_BUILD_TARGET === 'tauri') {
 			window.location.href = `/tags/${slug}.html`;
 		} else {
@@ -202,8 +200,8 @@
 		</calcite-combobox>
 	</div>
 	<!-- {#each demos as demo, i} -->
-	{#each activeVideos as item, i}
-		<ul>
+	<ul class="pb-8">
+		{#each activeVideos as item, i}
 			<li>
 				<calcite-card
 					selected={i === currentDemo ?? true}
@@ -213,7 +211,7 @@
 					<button
 						onclick={() => handleButtonPlay(i)}
 						aria-label={`Play demo video: ${item[currentDemo]}`}
-						class="cursor-pointer border-none bg-transparent text-left"
+						class="w-full cursor-pointer border-none bg-transparent text-left"
 						slot="thumbnail"
 					>
 						{#if item.image}
@@ -224,7 +222,7 @@
 							/>
 						{:else}
 							<img
-								class=""
+								class="aspect-video w-full object-cover"
 								src="https://dummyimage.com/300x169/141414/fff"
 								alt="placeholder 300x168"
 								width="300"
@@ -250,7 +248,7 @@
 							{:else}
 								<div class="flex flex-wrap gap-1">
 									{#each item.expand.tags as item}
-										<button onclick={() => handleRoute(item.slug)} class="cursor-pointer">
+										<button onclick={() => handleTagRoute(item.slug)} class="cursor-pointer">
 											<calcite-chip
 												class="flex cursor-pointer items-center text-xs"
 												kind="brand"
@@ -265,8 +263,8 @@
 					</div>
 				</calcite-card>
 			</li>
-		</ul>
-	{/each}
+		{/each}
+	</ul>
 </SidebarDemos>
 
 <Content bind:videoPlayerShowActions cn={`pt-0 relative e-video`}>
@@ -378,7 +376,7 @@
 
 		<div class="e-sidepanel__details-tags mt-2 -ml-[2px] flex flex-wrap gap-1">
 			{#each data.engagement.expand.tags as item}
-				<button onclick={() => handleRoute(item.slug)} class="cursor-pointer">
+				<button onclick={() => handleTagRoute(item.slug)} class="cursor-pointer">
 					<calcite-chip
 						class="flex cursor-pointer items-center"
 						kind="brand"

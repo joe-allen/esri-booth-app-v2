@@ -8,7 +8,7 @@
 
 ```
 # PUBLIC_BUILD_TARGET=static|''
-# PUBLIC_POCKETBASE_URL=https://aecdemo.pockethost.io/
+# PUBLIC_POCKETBASE_URL=https://esri-demos.pockethost.io/
 # // Used only for setting PB types (see: pocketbase-typegen)
 # PB_TYPEGEN_URL=http://127.0.0.1:8090
 # PB_TYPEGEN_EMAIL=hi.joeallen@gmail.com

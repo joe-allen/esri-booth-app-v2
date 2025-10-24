@@ -8,13 +8,11 @@
 
 	let { handleSearchInput } = $props();
 	let showSearchInput = $state(false);
-
-	function toggleSearchInput() {}
 </script>
 
 <header>
 	<a href="/" class="flex items-center gap-3">
-		<img src="/esri-logo.png" alt="Esri Logo" class="w-32 cursor-pointer" />
+		<img src="/assets/esri-logo.png" alt="Esri Logo" class="w-32 cursor-pointer" />
 		<h1 class="mt-[8px] text-3xl font-light text-white">DEMOS</h1>
 	</a>
 
